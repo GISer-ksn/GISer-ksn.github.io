@@ -23,6 +23,31 @@
     
     
     <entry>
+      <title>B站专栏文章复制</title>
+      <link href="/2020/07/16/B%E7%AB%99%E4%B8%93%E6%A0%8F%E6%96%87%E7%AB%A0%E5%A4%8D%E5%88%B6/"/>
+      <url>/2020/07/16/B%E7%AB%99%E4%B8%93%E6%A0%8F%E6%96%87%E7%AB%A0%E5%A4%8D%E5%88%B6/</url>
+      
+        <content type="html"><![CDATA[<h2 id="pc端b站专栏文章不可复制，在控制台执行一下代码即可"><a href="#pc端b站专栏文章不可复制，在控制台执行一下代码即可" class="headerlink" title="pc端b站专栏文章不可复制，在控制台执行一下代码即可"></a>pc端b站专栏文章不可复制，在控制台执行一下代码即可</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'div.article-holder'</span>).classList.remove(<span class="string">'unable-reprint'</span>);</span><br><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'div.article-holder'</span>).addEventListener(<span class="string">'copy'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    e.clipboardData.setData(<span class="string">"text"</span>,<span class="built_in">window</span>.getSelection().toString())</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//移除'不可复制'属性，添加事件监听</span></span><br></pre></td></tr></table></figure><br><br><br><br><br><p>版权声明：本文为CSDN博主「Haip」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。</p><p>原文链接：<a href="https://blog.csdn.net/u014324940/article/details/105101547/" target="_blank" rel="noopener">https://blog.csdn.net/u014324940/article/details/105101547/</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Bilibili </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JavaScript </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>hexo博客搭建</title>
       <link href="/2020/07/16/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
       <url>/2020/07/16/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
