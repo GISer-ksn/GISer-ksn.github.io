@@ -1,0 +1,224 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>antd——Form.Item下的子组件value值不生效问题 | 欧尼楠楠酱</title><meta name="description" content="前言最近做的项目前端是用React+Ant Design，在表单&lt;Form&gt;组件下，有好几个&lt;Form.Item&gt;，其中两个&lt;Form.Item&gt;下有&lt;Select&gt;，里面有固定的&lt;Option&gt;，具体如下图所示：   Question1：select选择器的默认值提交后显示未定义在antd组件中查看到，被设置了 name 属性的 For"><meta name="keywords" content="表单, 控件"><meta name="author" content="KSN,ksn_scau@163.com"><meta name="copyright" content="KSN"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/avatar.jpg"><link rel="canonical" href="http://giser.online/2020/07/25/antd%E2%80%94%E2%80%94Form-Item%E4%B8%8B%E7%9A%84%E5%AD%90%E7%BB%84%E4%BB%B6%E9%BB%98%E8%AE%A4%E5%80%BC%E4%B8%8D%E7%94%9F%E6%95%88%E9%97%AE%E9%A2%98/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="BTiMdASSWX"/><meta property="og:type" content="article"><meta property="og:title" content="antd——Form.Item下的子组件value值不生效问题"><meta property="og:url" content="http://giser.online/2020/07/25/antd%E2%80%94%E2%80%94Form-Item%E4%B8%8B%E7%9A%84%E5%AD%90%E7%BB%84%E4%BB%B6%E9%BB%98%E8%AE%A4%E5%80%BC%E4%B8%8D%E7%94%9F%E6%95%88%E9%97%AE%E9%A2%98/"><meta property="og:site_name" content="欧尼楠楠酱"><meta property="og:description" content="前言最近做的项目前端是用React+Ant Design，在表单&lt;Form&gt;组件下，有好几个&lt;Form.Item&gt;，其中两个&lt;Form.Item&gt;下有&lt;Select&gt;，里面有固定的&lt;Option&gt;，具体如下图所示：   Question1：select选择器的默认值提交后显示未定义在antd组件中查看到，被设置了 name 属性的 For"><meta property="og:image" content="https://pic3.zhimg.com/v2-905ce18fb673d4f7bcb05f6d82c5e805_r.jpg?source=172ae18b"><meta property="article:published_time" content="2020-07-25T01:18:28.000Z"><meta property="article:modified_time" content="2020-07-25T02:38:14.333Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = '1'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="next" title="加快访问速度+设置个人域名" href="http://giser.online/2020/07/20/%E5%8D%9A%E5%AE%A2%E7%BB%91%E5%AE%9A%E4%B8%AA%E4%BA%BA%E5%9F%9F%E5%90%8D/"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?317b0f8f69da61a78cee0b9fb8575a1d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-07-25 10:38:14'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.1"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><canvas class="fireworks"></canvas><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">5</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">5</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/video/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page" href="/images/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友接</span></a></div><div class="menus_item"><a class="site-page" href="/guestbook/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div></div></div></div><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Question1：select选择器的默认值提交后显示未定义"><span class="toc-number">2.</span> <span class="toc-text">Question1：select选择器的默认值提交后显示未定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Question2：两个select选择器联动失效"><span class="toc-number">3.</span> <span class="toc-text">Question2：两个select选择器联动失效</span></a></li></ol></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://img.zcool.cn/community/01ceb0594b2f7fa8012193a34a5e5a.jpeg@1280w_1l_2o_100sh.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">欧尼楠楠酱</a></span><span class="pull-right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/video/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page" href="/images/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友接</span></a></div><div class="menus_item"><a class="site-page" href="/guestbook/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">antd——Form.Item下的子组件value值不生效问题</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-07-25 09:18:28"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2020-07-25</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-07-25 10:38:14"><i class="fas fa-history fa-fw"></i> 更新于 2020-07-25</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/React/">React</a><i class="fas fa-angle-right post-meta__separator"></i><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/React/Ant-Design/">Ant Design</a></span></div><div class="meta-secondline"> <span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta__icon"></i><span>字数总计:</span><span class="word-count">661</span><span class="post-meta__separator">|</span><i class="far fa-clock fa-fw post-meta__icon"></i><span>阅读时长: 2 分钟</span></span></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><span class="post-meta__separator">|</span><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span><span class="post-meta__separator">|</span><i class="far fa-comments fa-fw post-meta__icon"></i><span>评论数:</span><a href="/2020/07/25/antd%E2%80%94%E2%80%94Form-Item%E4%B8%8B%E7%9A%84%E5%AD%90%E7%BB%84%E4%BB%B6%E9%BB%98%E8%AE%A4%E5%80%BC%E4%B8%8D%E7%94%9F%E6%95%88%E9%97%AE%E9%A2%98/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count comment-count" data-xid="/2020/07/25/antd%E2%80%94%E2%80%94Form-Item%E4%B8%8B%E7%9A%84%E5%AD%90%E7%BB%84%E4%BB%B6%E9%BB%98%E8%AE%A4%E5%80%BC%E4%B8%8D%E7%94%9F%E6%95%88%E9%97%AE%E9%A2%98/" itemprop="commentCount"></span></a></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近做的项目前端是用React+Ant Design，在表单<code>&lt;Form&gt;</code>组件下，有好几个<code>&lt;Form.Item&gt;</code>，其中两个<code>&lt;Form.Item&gt;</code>下有<code>&lt;Select&gt;</code>，里面有固定的<code>&lt;Option&gt;</code>，具体如下图所示：</p>
+<p><img src= "/img/loading.gif" data-src="/2020/07/25/antd%E2%80%94%E2%80%94Form-Item%E4%B8%8B%E7%9A%84%E5%AD%90%E7%BB%84%E4%BB%B6%E9%BB%98%E8%AE%A4%E5%80%BC%E4%B8%8D%E7%94%9F%E6%95%88%E9%97%AE%E9%A2%98/1595641213(1).png" alt="1595641213(1)"></p>
+<hr>
+<h1 id="Question1：select选择器的默认值提交后显示未定义"><a href="#Question1：select选择器的默认值提交后显示未定义" class="headerlink" title="Question1：select选择器的默认值提交后显示未定义"></a>Question1：<code>select选择器</code>的默认值提交后显示未定义</h1><p>在<a href="https://ant.design/components/overview-cn/" target="_blank" rel="noopener">antd组件</a>中查看到，被设置了 <code>name</code> 属性的 <code>Form.Item</code> 包装的控件，表单控件会自动添加 <code>value</code>（或 <code>valuePropName</code> 指定的其他属性） <code>onChange</code>（或 <code>trigger</code> 指定的其他属性），数据同步将被 Form 接管，这会导致以下结果：</p>
+<ol>
+<li>你不再需要也不应该用 <code>onChange</code> 来做数据收集同步（你可以使用 Form 的 <code>onValuesChange</code>），但还是可以继续监听 <code>onChange</code> 事件。</li>
+<li>你不能用控件的 <code>value</code> 或 <code>defaultValue</code> 等属性来设置表单域的值，默认值可以用 Form 里的 <code>initialValues</code> 来设置。注意 <code>initialValues</code> 不能被 <code>setState</code> 动态更新，你需要用 <code>setFieldsValue</code> 来更新。</li>
+<li>你不应该用 <code>setState</code>，可以使用 <code>form.setFieldsValue</code> 来动态改变表单值。</li>
+</ol>
+<br>
+
+<p><u><strong>简单的说，我遇到的问题正如第二段描述的那样，form控件很贴心的给我们准备了<code>initialValues</code></strong></u> </p>
+<p><img src= "/img/loading.gif" data-src="/2020/07/25/antd%E2%80%94%E2%80%94Form-Item%E4%B8%8B%E7%9A%84%E5%AD%90%E7%BB%84%E4%BB%B6%E9%BB%98%E8%AE%A4%E5%80%BC%E4%B8%8D%E7%94%9F%E6%95%88%E9%97%AE%E9%A2%98/image-20200725095523218.png" alt="image-20200725095523218"></p>
+<p><u><strong>我们只需要在form控件中加入这个属性就行</strong></u></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;Form</span><br><span class="line">    name=<span class="string">"xxx"</span></span><br><span class="line">    initialValues=&#123;&#123;   <span class="comment">//赋初始值</span></span><br><span class="line">    FactName: <span class="keyword">this</span>.state.tempDataSource.FactName,</span><br><span class="line">    manuType: <span class="keyword">this</span>.state.tempDataSource.type,</span><br><span class="line">    phone: <span class="keyword">this</span>.state.tempDataSource.phone,</span><br><span class="line">    proModel: <span class="keyword">this</span>.state.tempDataSource.model,</span><br><span class="line">    people: <span class="keyword">this</span>.state.tempDataSource.people,</span><br><span class="line">    &#125;&#125;</span><br><span class="line">&gt;</span><br><span class="line">    ...</span><br><span class="line">&lt;<span class="regexp">/Form&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="Question2：两个select选择器联动失效"><a href="#Question2：两个select选择器联动失效" class="headerlink" title="Question2：两个select选择器联动失效"></a>Question2：两个<code>select选择器</code>联动失效</h1><p>我举官网上的示例说明一下这个问题</p>
+<p><img src= "/img/loading.gif" data-src="/2020/07/25/antd%E2%80%94%E2%80%94Form-Item%E4%B8%8B%E7%9A%84%E5%AD%90%E7%BB%84%E4%BB%B6%E9%BB%98%E8%AE%A4%E5%80%BC%E4%B8%8D%E7%94%9F%E6%95%88%E9%97%AE%E9%A2%98/image-20200725100942603.png" alt="image-20200725100942603"></p>
+<p><img src= "/img/loading.gif" data-src="/2020/07/25/antd%E2%80%94%E2%80%94Form-Item%E4%B8%8B%E7%9A%84%E5%AD%90%E7%BB%84%E4%BB%B6%E9%BB%98%E8%AE%A4%E5%80%BC%E4%B8%8D%E7%94%9F%E6%95%88%E9%97%AE%E9%A2%98/image-20200725100958461.png" alt="image-20200725100958461"></p>
+<p>当我选择第一个select值为zhejiang时，第二个选择器自动选择默认的第一个值hangzhou</p>
+<p>当我选择第一个select值为jiangsu时，第二个选择器自动选择默认的第一个值nanjing</p>
+<br>
+
+<p><strong>但是当你的select选择器嵌套在form表单时，select选择器中的value值失效了，就不能自动获取到另一个select选择器的value值，导致select选择器直接的联动失效，这时候该怎么办呢？</strong></p>
+<br>
+
+<p>我们可以通过 <code>ref</code> 获取数据域，步骤是：</p>
+<ol>
+<li>定义字段  formRef = React.createRef();</li>
+<li>在select选择器触发选择的函数里面添加   this.formRef.current.setFieldsValue({  …  });</li>
+<li>在Form表单里添加属性    ref={this.formRef}</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">	formRef = React.createRef&lt;FormInstance&gt;();</span><br><span class="line"></span><br><span class="line">    onGenderChange = <span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.formRef.current.setFieldsValue(&#123;</span><br><span class="line">          ...<span class="comment">//设置第二个select选择器的值</span></span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line">	render() &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">      &lt;Form  ref=&#123;<span class="keyword">this</span>.formRef&#125; name=<span class="string">"xxx"</span> onFinish=&#123;<span class="keyword">this</span>.onFinish&#125;&gt;</span><br><span class="line">                ...</span><br><span class="line">                &lt;Select onGenderChange&gt;  ...   &lt;<span class="regexp">/Select&gt;</span></span><br><span class="line"><span class="regexp">                &lt;Select&gt;  ...   &lt;/</span>Select&gt;</span><br><span class="line">      &lt;<span class="regexp">/Form&gt;</span></span><br><span class="line"><span class="regexp">            )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<p><strong>到此我遇到的两个问题解决了，如果你们有什么疑问或者遇到什么新的问题欢迎留言讨论！！！</strong></p>
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<br></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:ksn_scau@163.com">KSN</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://giser.online/2020/07/25/antd%E2%80%94%E2%80%94Form-Item%E4%B8%8B%E7%9A%84%E5%AD%90%E7%BB%84%E4%BB%B6%E9%BB%98%E8%AE%A4%E5%80%BC%E4%B8%8D%E7%94%9F%E6%95%88%E9%97%AE%E9%A2%98/">http://giser.online/2020/07/25/antd%E2%80%94%E2%80%94Form-Item%E4%B8%8B%E7%9A%84%E5%AD%90%E7%BB%84%E4%BB%B6%E9%BB%98%E8%AE%A4%E5%80%BC%E4%B8%8D%E7%94%9F%E6%95%88%E9%97%AE%E9%A2%98/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://giser.online" target="_blank">欧尼楠楠酱</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/React/">React</a><a class="post-meta__tags" href="/tags/Ant-Design/">Ant Design</a></div><div class="post_share"><div class="social-share" data-image="https://pic3.zhimg.com/v2-905ce18fb673d4f7bcb05f6d82c5e805_r.jpg?source=172ae18b" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><button class="reward-button" type="button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="/img/wechat.jpg" alt="wechat" onclick="window.open('/img/wechat.jpg')"/><div class="post-qr-code__desc">wechat</div></li><li class="reward-item"><img class="post-qr-code__img" src="/img/alipay.jpg" alt="alipay" onclick="window.open('/img/alipay.jpg')"/><div class="post-qr-code__desc">alipay</div></li></ul></div></button></div><div class="post-ad"><ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="xxxxxxxxxxxx" data-ad-client="ca-pub-xxxxxxxxxx" data-ad-slot="xxxxxxxxxx"></ins><h1 align="center" style="color:red; font-size:large; background:#dee4de">广告位招租</h1><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2020/07/20/%E5%8D%9A%E5%AE%A2%E7%BB%91%E5%AE%9A%E4%B8%AA%E4%BA%BA%E5%9F%9F%E5%90%8D/"><img class="next-cover" data-src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1230912905,3395627128&amp;fm=26&amp;gp=0.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">加快访问速度+设置个人域名</div></div></a></div></nav><hr><div id="post-comment"><div class="comment-head"><div class="comment-headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div class="comments-items-1" data-name="Valine"><div class="vcomment" id="vcomment"></div><script>function loadvaline () {  
+  var requestSetting = function (from,set) {
+    var from = from
+    var setting = set.split(',').filter(function(item){
+    return from.indexOf(item) > -1
+    });
+    setting = setting.length == 0 ? from :setting;
+    return setting
+  }
+
+  var guestInfo = requestSetting(['nick','mail','link'],'nick,mail,link')
+  var requiredFields = requestSetting(['nick','mail'],'nick,mail')
+
+  function initValine () {
+    window.valine = new Valine({
+      el:'#vcomment',
+      appId: 'fhQd5e5S7XFUedIx18upHWwM-gzGzoHsz',
+      appKey: 'v9JMEP66Y1bVSdys93rUrrDH',
+      placeholder: '记得留下您的昵称和邮箱...可以更快收到回复',
+      avatar: 'monsterid',
+      meta: guestInfo,
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      requiredFields: requiredFields
+    });
+  }
+  loadScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || false) {
+  window.addEventListener('load', loadvaline)
+}
+else {
+  function loadOtherComment () {
+    loadvaline()
+  }
+}</script></div></div></div></article></main><footer id="footer" style="background-image: url(https://img.zcool.cn/community/01ceb0594b2f7fa8012193a34a5e5a.jpeg@1280w_1l_2o_100sh.jpg)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2020 By KSN</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div><div class="footer_custom_text">抓住一只小可爱，你就乖乖呆在我的博客里吧！</div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div class="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="/js/third-party/fireworks.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="false" src="/js/third-party/piao.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="/js/third-party/canvas-nest.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/search/local-search.js"></script><script>if (document.getElementsByClassName('mermaid').length) {
+  loadScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js',function () {
+    mermaid.initialize({
+      theme: 'default',
+  })
+})
+}</script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script></body></html>
