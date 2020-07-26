@@ -594,7 +594,7 @@ aside:
     description:
   card_announcement:
     enable: true
-    content: Candice是个小屁孩
+    content: https://www.bilibili.com/video/BV1eZ4y1T7Zg?t=4
   card_recent_post:
     enable: true
     limit: 5 # if set 0 will show all
