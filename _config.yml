@@ -99,13 +99,15 @@ theme: butterfly
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: 'git'
-  repo: 
+  - type: git
+    repo: 
       github:
           https://github.com/GISer-ksn/GISer-ksn.github.io
       coding:
           https://e.coding.net/giser-ksn/GISer-ksn/GISer-ksn.git
-  branch: 'master'
+    branch: 'master'
+
+  - type: baidu_url_submitter
 
 # Music
 aplayer:
