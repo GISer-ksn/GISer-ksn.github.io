@@ -592,9 +592,10 @@ aside:
   card_author:
     enable: true
     description:
+#公告
   card_announcement:
     enable: true
-    content: https://www.bilibili.com/video/BV1eZ4y1T7Zg?t=4
+    content: <div style="font-weight:bold">请戳这里，哈哈一笑<a style="color:blue" href="https://www.bilibili.com/video/BV1eZ4y1T7Zg?t=4">https://www.bilibili.com/video/BV1eZ4y1T7Zg?t=4</a></div>
   card_recent_post:
     enable: true
     limit: 5 # if set 0 will show all
