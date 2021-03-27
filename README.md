@@ -59,3 +59,44 @@
 
 其实不需要拷贝的文件正是`.gitignore`中所忽略的。
 
+
+
+
+
+## 写博客：
+
+1、在GISer-ksn.github.io下git bush here 
+
+2、hexo n post "文章名"
+
+3、进入GISer-ksn.github.io\source\_posts找到 文章名.md
+
+4、输入
+
+```
+title: 文章名
+date: 0000-00-00 00:00:00
+tags: 
+  - xxx
+  - xxx
+keywords: "xxx, xxx..."
+categories: 
+  - xxx
+  - xxx
+toc_number: true
+cover: URL
+top_img: URL
+//URL可上传到gitee然后获取
+```
+
+5、写内容（若有图片则把图片复制到同层同名文件夹下，路径为 文章名/图片名）
+
+6、hexo s 本地服务器启动，用于调试页面 地址为localhost:4000
+
+7、hexo cl  //清理
+
+8、hexo g  //生成
+
+9、hexo d  //远端部署  账号:giser-ksn  密码:8023NNzz
+
+10、git提交  账号:GISer-Ksn  密码:8023NNzz
