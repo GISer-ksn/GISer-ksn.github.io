@@ -4,6 +4,64 @@
   
     
     <entry>
+      <title>WebGIS笔记</title>
+      <link href="/2021/03/27/WebGIS%E7%AC%94%E8%AE%B0/"/>
+      <url>/2021/03/27/WebGIS%E7%AC%94%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="GML、SVG、VML的比较"><a href="#GML、SVG、VML的比较" class="headerlink" title="GML、SVG、VML的比较"></a>GML、SVG、VML的比较</h1><p>GML、SVG和VML都是基于XML的可用来描述矢量图形的标记语言，都是XML词表，它们的语法并不难理解，但它们都有各自不同的用途和特点，下面简单介绍一下。 GML(Geography Markup Language)<br>是基于XML的空间信息编码标准，由OpenGIS Consortium (OGC)提出，得到了许多公司的大力支持，如Oracle、Galdos、MapInfo、CubeWerx等。运用GML，封装的地理数据和图形解释是清楚分离的。 </p><ul><li>GML基于XML用文本表示地理信息</li></ul><p>由于GML可看成是XML的一个具体的词表，熟悉了XML就比较容易理解GML。而且随着XML的应用日益广泛，GML也将受益。另外文本比较简单、直观，容易理解和编辑。 </p><ul><li>GML封装了地理信息及其属性</li></ul><p>GML基于地理信息抽象模型，即空间实体特征及属性封装。地理特征包括一系列的属性和相应的几何信息，一般来说属性由名字、类型和值组成，几何信息由基本元素如点、线、面、曲线、多边形等组成。目前GML主要局限在二维应用，正扩展到二维半和三维空间以及特征间的拓扑关系。GML允许相当复杂的特征，如特征间的嵌套。例如飞机场由出租汽车道、飞机跑道等组成。 </p><ul><li>GML封装了空间地理参考系统</li></ul><p>空间地理参考系统是地理信息系统数据处理的基础。GML封装了空间地理参考系统、主要的投影关系等，保证分布式处理的扩展性和灵活性。 </p><ul><li>GML可以实现地理数据的分布式存储</li></ul><p>GML对地理数据的分发是非常方便的技术手段，但其作用不止局限于此，同样可以成为地理数据分布式存储的重要手段。主要的技术工具是XLink和Xpointer。 </p><p>从上边的介绍可以看出GML作为描述空间信息的元语言的一些优点。它只能描述空间实体的矢量信息和属性，具体显示的时候可采用两种不同的途径：<br>GML Drawà Display<br>GML Transform. à SVG, VML Draw àDisplay<br>第一种途径需要直接操作GML数据进行分析并显示。<br>第二种途径是把GML数据转换成相应的图形格式的数据，例如SVG,VML及X3D。然后由已经存在的支持这几种图形格式的软件进行显示。下面介绍一下SVG和VML。 </p><p>VML(Vector Markup Language)<br>是一个最初由Microsoft开发的XML词表，现在也只有IE5.0以上版本对VML提供支持。使用VML可以在IE中绘制矢量图形，所以有人认为VML就是在IE中实现了画笔的功能。下面介绍一下VML的优点： </p><ul><li>基于XML标准</li></ul><p>XML是公认拥有无穷生命力的下一代网络标记语言， VML具有先天的优势，它的表示方法简单，易于扩展等等。 </p><ul><li>支持高质量的矢量图形显示</li></ul><p>VML 支持广泛的矢量图形特征，它们基于由相连接的直线和曲线描述路径。在VML中使用两个基本的元素：shape和group。这两个元素定义了VML的全部结构；shape描述一个矢量图形元素，而group用来将这些图形结合起来，这样它们可以作为一个整体进行处理。<br>VML规范包括大量的支持多种不同矢量图形特征的元素。下面是VML的预定义图形元素：<br>l Shape<br>l Path<br>l Line<br>l Polyline<br>l Curve<br>l Rect<br>l Roundrect<br>l Oval<br>l Arc<br>l Group<br>由文本构成的图像，并可集成到HTML<br>由于VML使用简单的文本来表示图像，这样就可用很少的字节来表示比较复杂的图像。VML与HTML兼容，通过在HTML中声明VML命名空间并声明处理函数，就可以和其他HTML元素一样使用VML元素，在客户端浏览器显示图像。VML标记里面可以定义DHTML大部分属性和事件，比如说id, name, title, onmouseover 等等。 </p><ul><li>支持交互与动画</li></ul><p>但VML的功能不只是绘图，他还可以在图形中嵌入文本，并可实现超链，还可通过脚本语言实现一定的动画功能。VML赏析 </p><p>SVG(Scalable Vector Graphics)<br>SVG 是一种基于XML的开放的矢量图形描述语言。SVG图像是与XML1.0兼容的文档，SVG元素是指示如何绘制图像的一些指令，阅读器(Viewer)解释这些指令，把SVG图像在指定设备上显示出来。使用SVG可以在网页上显示出各种各样的高质量的矢量图形，支持很多您想象得出的功能：几何图形、动画、渐变色、滤镜效果等。最关键的是，它也是完全用普通文本来描述的！也就是说，这是一种专门为网络而设计的基于文本的图像格式。<br>SVG是对PGML和VML的一种综合,所以VML的优点也就成为SVG的优点，例如：<br>基于XML标准<br>高质量的矢量图像<br>由文本构成的图像<br>我们可以不用任何图像处理工具，仅仅用记事本就可以生成一个SVG图像。这对于图像处理的工作者来说可能会感到不可思议。其实仔细想想也可以理解，矢量图像一般是以算法指令来描述，建立在文本基础上的SVG图像中所有的描述语句都可以直接观察到，所以也非常容易进行二次修改与更新，”可升级”的特点在这里可以得到恰当的反映。<br>另外，与VML相比SVG还有一些优点：<br>灵活的文件格式<br>SVG可升级的特性不仅仅表现在二次修改方面，还表现在另外很多地方，包括这里介绍的灵活的文件格式。在以前的图像中，文本都作为位图而保存于图像中，图像形成以后不能单独对文本进行修改；在PNG格式中这一点有所改进，文本可作为一个独立的层存在；SVG更灵活地扩展了图像的文件格式，它由三个部分组成：矢量图形、位图和文字。这样SVG不仅仅可以应用矢量图像和文字对象，同样可以纳入位图，可以制作出任何其它格式图像能达到的效果。由于文件格式是文本形式的，可以很容易地在以后任何时候进行修改。而且在页面运行的过程中，也可以对很多部分做即时的修改，其中的图形描述还可以重复使用。<br>支持交互和动画<br>SVG支持SMIL（synchronized multimedia integration language），使得用户可以自由的同SVG中的元素完成一些交互的动作，从而完成既定的目标，这一点在目前单独依靠图片是完成不了的，需要由网页中的脚本语句来实现。<br>支持字符查找<br>查找”图片”中的字符，在SVG中成为可能。而这在其它格式的图片文件中则是不可能的。<br>支持Xlink 和Xpointer<br>  这样就可以在SVG文档之间制作超级链接。<br>SVG 作为W3C组织正式推荐的图像格式，拥有众多的支持机构。像Adobe公司已经宣称将在推出的Adobe图像处理套件如Illustrator、 Photoshop、GoLive和Cyber Studio中集成SVG的全部功能，并且还提供Netscape Navigator和IE的插件，以便使其能够直接支持SVG文件的浏览。Netscape和Microsoft公司也已经开始进军SVG领域，这标志着未来的网络浏览器将会内置对SVG文件的支持功能。 </p><p>总结 GML、SVG、VML都与矢量图形有着密切的关系：GML在表示实体的空间信息的同时加入了实体的其他属性信息，是表示实体的空间信息和属性的编码标准，但它并不支持直接显示图形。而VML和SVG是在表示图形的矢量信息同时加入了图形的显示信息（即以什么样的样式显示矢量图形），是显示矢量图形的两种比较好的格式。相比之下，SVG是综合了VML的优点后推出的，是国际标准，它比VML具有更多的优点，也有更广阔的前景。但由于VML有IE的支持，而SVG要想在浏览器中显示就需要安装插件，在这一点上，VML优于SVG。</p><h1 id="介绍一下OGC、WMS、WFS、WCS等几个概念"><a href="#介绍一下OGC、WMS、WFS、WCS等几个概念" class="headerlink" title="介绍一下OGC、WMS、WFS、WCS等几个概念"></a>介绍一下OGC、WMS、WFS、WCS等几个概念</h1><p>1.OGC </p><p>​    Open Geospatial Consortium——开放地理信息联盟，是一个非盈利的志愿的国际标准化组织，引领着空间地理信息标准及定位基本服务的发展目前在空间数据互操作领域，基于公共接口访问模式的互操作方法是一种基本的操作方法。通过国际标准化组织（ISO/TC211）或技术联盟（如OGC）制定空间数据互操作的接口规范，GIS软件商开发遵循这一接口规范的空间数据的读写函数，可以实现异构空间数据库的互操作。基于http（Web）XML的空间数据互操作是一个很热门的研究方向，主要涉及Web Service的相关技术。OGC和ISO/TC211共同推出了基于Web服务（XML）的空间数据互操作实现规范Web Map Service，Web Feature Service，Web Coverage Service以及用于空间数据传输与转换的地理信息标记语言GML。 </p><p>2.Web地图服务（WMS） </p><p>ps：推荐 快</p><p>​    利用具有地理空间位置信息的数据制作地图。其中将地图定义为地理数据可视的表现。这个规范定义了三个操作：GetCapabitities返回服务级元数据，它是对服务信息内容和要求参数的一种描述； GetMap返回一个地图影像，其地理空间参考和大小参数是明确定义了的；GetFeatureInfo（可选）返回显示在地图上的某些特殊要素的信息 </p><p>3.Web要素服务（WFS） </p><p>​     Web地图服务返回的是图层级的地图影像，Web要素服务（WFS）返回的是要素级的GML编码，并提供对要素的增加、修改、删除等事务操作，是对Web地图服务的进一步深入。OGC Web要素服务允许客户端从多个Web要素服务中取得使用地理标记语言（GML）编码的地理空间数据，这个远东定义了五个操作：GetCapabilites返回Web要素服务性能描述文档（用XML描述）；DescribeFeatureType返回描述可以提供服务的任何要素结构的XML文档；GetFeature为一个获取要素实例的请求提供服务；Transaction为事务请求提供服务；LockFeature处理在一个事务期间对一个或多个要素类型实例上锁的请求。 </p><p>4.Web覆盖服务（WCS）面向空间影像数据，它将包含地理位置值的地理空间数据作为“覆盖（COverage）”在网上相互交换。网络覆盖服务由三种操作组成：GetCapabilities，GetCoverage和DescribeCoverageType。GetCapabilities操作返回描述服务和数据集的XML文档。网络覆盖服务中的GetCoverage操作是在GetCapabilities确定什么样的查询可以执行、什么样的数据能够获取之后执行的，它使用通用的覆盖格式返回地理位置的值或属性。DescribeCoverageType操作允许客户端请求由具体的WCS服务器提供的任一覆盖层的完全描述。 </p><p>以上三个规范既可以做为Web服务的空间数据服务规范，又可以做为空间数据的互操作实现远东。只要某一个GIS软件支持这个接口，部署在本地服务器上，其他GIS软件就可以通过这个接口得到所需要的数据。从技术实现的角度，可以将Web服务理解为一个应用程序，它向外界暴露出一个能通过Web进行调用的接口，允许被任何平台、任何系统，用任何语言编写的程序调用。这个应用程序可以用现有的各种编程语言实现。Web服务最大的特点是可以实现跨平台、跨语言、跨硬件的互操作，正是Web服务中的SOAP、WSDL和UDDI保证了Web服务的跨平台互操作的特性，所以，如何使用SOAP、WSDL和UDDI来部署、描述、传输和注册一个Web服务是实现Web服务的关键。由于SOAP、WSDL和UDDI是一套标准，不同的厂商可以有实现这些标准的不同产品，例如SUN、APACHE、IBM、Borland等公司推出的基于JAVA平台的Web服务工具包，以及微软提出的.NET平台等，这些工具为实现Web服务的开发、部署、描述提供了方便的工具，极大的降低了开发Web服务的复杂度。</p><h1 id="开源GIS之WMS：动态绘制地图"><a href="#开源GIS之WMS：动态绘制地图" class="headerlink" title="开源GIS之WMS：动态绘制地图"></a>开源GIS之WMS：动态绘制地图</h1><h3 id="0、前言"><a href="#0、前言" class="headerlink" title="0、前言"></a><strong>0、前言</strong></h3><p>有多种方法在网页浏览器中显示地图：</p><ul><li><p>第一种是将服务器中事先绘制好的地图图像（即地图切片），发送给浏览器  ——  瓦片地图</p></li><li><p>第二种是从服务器上返回一串代表空间图形与属性的文本，然后在浏览器端绘制  ——  <strong>WFS</strong>（Web要素服务）</p></li><li><p>第三种是在服务器端根据请求的内容绘制一个地图图像（在服务器端绘制），然后返回给客户端。  ——  <strong>WMS</strong>（Web地图服务） </p><p>WMS因为每次都是根据用户请求参数，随时绘制地图，图像反映数据的最新情况，因此该方式通常称为<strong>动态地图服务</strong>。而切片地图方式只反映了生成地图切片时的数据状况。</p></li></ul><h3 id="1、动态绘制地图的优点"><a href="#1、动态绘制地图的优点" class="headerlink" title="1、动态绘制地图的优点"></a><strong>1、动态绘制地图的优点</strong></h3><p>  由于动态地图服务是在请求时访问数据并绘制的，因此对于要显示数据最新状态的需求最为有用。对于同一时间改变位置的地理要素（例如，要绘制一个大型车队中各车辆的位置），使用动态地图服务方式来绘制是最佳的选择。</p><p>  此外，对于那些使用切片地图来说难以生成切片、难以存储或维护的大范围地图，动态地图也是最佳的解决方案。</p><p>  通过WMS来动态绘制地图时可以使用许多符号，还可以使用<strong>样式化图层描述符（Styled Layer Descriptors，SLD）</strong>。如果喜欢QGIS来制图，那么还可以使用其输出SLD，并将其导入到GeoServer中，这样便可以让互联网的用户也可在客户端GIS中使用同样的样式。此外，在服务器上绘制地图可以使用很复杂的符号，通常在网页浏览器中直接绘图只能使用简单的符号。</p><h3 id="2、动态绘制地图的缺点"><a href="#2、动态绘制地图的缺点" class="headerlink" title="2、动态绘制地图的缺点"></a><strong>2、动态绘制地图的缺点</strong></h3><p>  等待服务器来绘制地图是一个缓慢痛苦的经历，尤其是有许多层要渲染时。对于桌面应用，2~3秒钟的等待时间被认为是可接受，但对于“刁钻“的互联网地图用户来说，就不可接受了，因为他们既不是GIS相关专业，也不懂后端技术。现在，人们期待每一个地图应用像谷歌地图的响应速度一样，而这不使用地图切片是难以实现的。</p><p>  如果某一个Web GIS有许多用户同时请求地图，那么动态地图服务便容易超负荷运行。而这就导致了两难境地：你希望地图有用，但如果服务器使用的技术是不可扩展的话，用户越多，响应越慢。</p><p>  如果知道只有有限的用户访问地图应用，例如企业内部使用的Web GIS，使用动态绘图服务能满足用户体验要求，那么也可以不使用地图切片，从而节省了生成与维护地图切片工作。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Web GIS </category>
+          
+          <category> 笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Web GIS </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>OpenLayers概述</title>
+      <link href="/2021/02/15/OpenLayers%E6%A6%82%E8%BF%B0/"/>
+      <url>/2021/02/15/OpenLayers%E6%A6%82%E8%BF%B0/</url>
+      
+        <content type="html"><![CDATA[<h3 id="一、OpenLayers概述"><a href="#一、OpenLayers概述" class="headerlink" title="一、OpenLayers概述"></a>一、OpenLayers概述</h3><p><strong>1.OpenLayers核心职责</strong></p><p>  <a href="https://link.jianshu.com/?t=http%3A%2F%2Fopenlayers.org%2F" target="_blank" rel="noopener">OpenLayers</a>最新大版本是openlayers4，它是一个基于h5的GIS前端库，地图渲染方式为Canvas和WebGL，常用Canvas展示二维地图，支持WebGL渲染显示出将来的OpenLayers有支持三维方向的可能。OpenLayers作为一个地图前端库主要负责GIS数据的<strong>展示与交互</strong>。<br>  OpenLayers仅仅是开源GIS框架中的<strong>前端部分</strong>，并不等于是GIS系统，所以很多非GIS专业的前端使用OpenLayers常常会出现很多误区，如社区中每隔几天就有人问的问题：</p><ol><li>请问怎样用ol加载几百万点啊？我现在加载了感觉很卡。</li><li>请问ol能实现路径分析吗？ol能实现缓冲区分析吗？</li></ol><p>提问的人忽略了ol的核心职责是<strong>展示与交互</strong>，实际项目中也不可能有将几千万几百万数据推到前端展示和交互的，一般这种都是后端渲染图刷到前端展示，或者使用矢量切片抽希数据到前端展示，正如普通的web开发中的表单需要分页查询和分页展示是一个道理。至于分析一般是服务端或者空间数据库负责分析，分析结果提交前端展示。业务常常是复杂的，但是每个工具的职责是清晰的，请将复杂的业务交由正确的工具去完成！</p><p><strong>2.OpenLayers的定位</strong></p><p>  GIS前端渲染库除了OpenLayers还有LeafLet和ESRI公司的ArcGIS API，同样能支持地图的前端库还有百度api，高德api，谷歌api等，还有Echarts，D3.js等，初学者常常不能理解他们之间的关系。常常听人说，路径分析我就用高德API不就可以了吗？展示数据我用下Echarts不可以吗？仍然是一句话，选择什么样的工具，完全是依据实际业务需求而定的。当前和地图相关的库大概分类如下：</p><ul><li>在线地图lbs服务：这类库的代表是百度api，高德api，谷歌api，主要特点是：公网环境，开发者需要申请key，key的地图请求服务有次数限制。地图数据和服务都是百度高德提供的，开发者常常是将业务有限的点（几个点，几十个点，几百个点等）定到地图上定个位置。开发中使用它们主要是如招聘网站上公司位置的一个定位，互联网应用中的lbs服务，如各种快递，外卖等app中附近的餐馆影院等。在企业和政府应用中，业务非常复杂，在线地图服务提供的数据不是我们要的，提供的服务不能满足我们的应用，所以实际上基本不会在企业开发中使用。LBS！=GIS。</li><li>数据可视化库：Echarts，D3.js主要作用是web端实现数据可视化的，提供丰富的图表等展示和交互，由于地图的使用越来越普及，所以不可避免的他们也会支持数据在地图上的展示。但主要定位仍然是数据可视化，在开发中，常常指定某个div，用来展示和交互下数据，属于页面的一小部分业务。而一般的综合指挥调度系统的地图是一个应用，加载非常多的图层，可以随时通过地图向地图单元发送指挥命令。page！=application。</li><li>GIS地图库:ol,LeafLet,arcgis api等都属于企业级地图应用开发库，彼此之间大同小异。稍微的差异是arcgis api需要arcserver提供服务，离开了server基本没任何优势。leaflet主要优势还是在开发的第三方控件比较多，但是兼容性比较差。且以“体积小，对移动端友好”为著称，在ol2的年代的确如此，但个人认为API的结构不如ol好，且ol3之后版本支持自定义打包，也支持移动端应用，ol4版本实现es6的import语法，实现按需加载，足以胜任开发大型GIS应用的要求。</li></ul><p>综述：OpenLayers是GIS地图库，定位于开发GIS应用，而非地图页面，用于复杂的展示和交互用户数据。</p><h3 id="二、OpenLayers的特征"><a href="#二、OpenLayers的特征" class="headerlink" title="二、OpenLayers的特征"></a>二、OpenLayers的特征</h3><p><strong>2.1、支持瓦片图层</strong></p><p>  OpenLayers支持从OSM、Bing、MapBox、Stamen和其他任何你能找到的XYZ瓦片资源中提取地图瓦片并在前端展示。同时也支持OGC的WMTS规范的瓦片服务以及ArcGIS规范的瓦片服务。</p><p><strong>2.2、支持矢量切片（或者矢量瓦片）</strong></p><p>  OpenLayers也支持矢量切片的访问和展示，包括MapBox矢量切片中的pbf格式，或者GeoJSON格式和TopoJSON格式的矢量切片。</p><p><strong>2.3、支持矢量图层</strong></p><p>  能够渲染GeoJSON、TopoJSON、KML、GML和其他格式的矢量数据，上面说的矢量切片形式的数据也可以被认为是在矢量图层中渲染。</p><p><strong>2.4、支持OGC规范</strong></p><p>  OpenLayers支持OGC制定的WMS、WFS等GIS网络服务规范。</p><p><strong>2.5、运用前沿技术</strong></p><p>  利用Canvas 2D、WebGL以及HTML5中其他最新的技术来构建功能。同时支持在移动设备上运行。</p><p><strong>2.6、易于定制和扩展</strong></p><p>  可以直接调整CSS来为地图控件设计样式。而且可以对接到不同层级的API进行功能扩展，或者使用第三方库来定制和扩展。</p><p><strong>2.7、面向对象的思想</strong></p><p>  最新版本的OpenLayers采用纯面向对象的ECMA Script 6进行开发，可以说，在OpenLayers中万物皆对象。</p><p><strong>2.8、优秀的交互体验</strong></p><p>  OpenLayers实现了类似于Ajax的无刷新功能，可以结合很多优秀的JavaScript功能插件，带给用户更多丰富的交互体验。</p><h3 id="三、OpenLayers的框架结构"><a href="#三、OpenLayers的框架结构" class="headerlink" title="三、OpenLayers的框架结构"></a>三、OpenLayers的框架结构</h3><p>  OpenLayers遵循面向对象的思想进行设计过程中，实现了各种十分强大的功能，这也意味着它的框架体系也比较庞大。</p><p>  让我们看一幅OpenLayers的框架类图：</p><p><img src= "/img/loading.gif" data-src="https://img-blog.csdnimg.cn/20190530174435458.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1NzMyMTQ3,size_16,color_FFFFFF,t_70" alt="img"></p><p>  可以看到OpenLayers实现了上百个类，用于对GIS中的各种事物进行抽象表达。</p><p>  其中，Map、Layer、Source和View是OpenLayers框架体系中的核心类，几乎所有的动作都围绕这几个核心类展开，以实现地图加载和相关操作。</p><p>  在OpenLayers的体系框架中：把整个地图看作一个容器（Map），核心为地图图层（Layer），每个图层有对应的数据源（Source），并由地图视图（View）进行地图表现。地图容器上还支持一些与用户交互的控件（Control和Interaction），另外，OpenLayers还支持事件机制。</p><h3 id="四、mapbox-js-和-mapbox-gl-js有什么区别？"><a href="#四、mapbox-js-和-mapbox-gl-js有什么区别？" class="headerlink" title="四、mapbox.js 和 mapbox-gl.js有什么区别？"></a>四、mapbox.js 和 mapbox-gl.js有什么区别？</h3><p>相同点：</p><ul><li>都是由Mapbox公司推出的免费开源的JavaScript库</li><li>都可以作为前端渲染矢量瓦片交互地图的工具</li><li>它们的样式设置都支持Mapbox Style</li></ul><p>不同点：</p><ul><li>mapbox.js是Leaflet的一个插件，使用方式是通过结合Leaflet使用</li><li>mapbox-gl.js 则是使用WebGL技术独立渲染前端库，不需要结合其它渲染引擎（比如Leaflet、OpenLayer）来使用。</li><li>使用mapbox-gl.js的浏览器必须支持WebGL渲染，在旧的浏览器中是不支持mapbox-gl.js的，而mapbox.js则没有此限制</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Web GIS </category>
+          
+          <category> OpenLayer </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Web GIS </tag>
+            
+            <tag> OpenLayer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>vue风格指南</title>
       <link href="/2021/01/29/vue%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/"/>
       <url>/2021/01/29/vue%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/</url>
